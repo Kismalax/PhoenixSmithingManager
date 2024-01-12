@@ -1,0 +1,7 @@
+name: PhoenixSmithingManager
+author: Kismalax
+main: com.github.kismalax.smithingmanager.PhoenixSmithingManager
+website: https://pro-phoenix.net/
+version: ${version}
+description: Changes how smithing templates works on your server
+api-version: 1.20
