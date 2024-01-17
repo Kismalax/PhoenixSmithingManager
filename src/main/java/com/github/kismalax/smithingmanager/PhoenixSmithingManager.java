@@ -64,6 +64,7 @@ public class PhoenixSmithingManager extends JavaPlugin {
 	}
 	
 	private void prepareConfig() {
+		saveDefaultConfig();
 		FileConfiguration config = getConfig();
 		
 		config.addDefault("disableCrafting", allSmithingTemplates);
@@ -71,7 +72,7 @@ public class PhoenixSmithingManager extends JavaPlugin {
 		config.addDefault("removeBrushLoot", List.of(Material.HOST_ARMOR_TRIM_SMITHING_TEMPLATE.name(), Material.SHAPER_ARMOR_TRIM_SMITHING_TEMPLATE.name(),
 				Material.RAISER_ARMOR_TRIM_SMITHING_TEMPLATE.name(), Material.WAYFINDER_ARMOR_TRIM_SMITHING_TEMPLATE.name()));
 		config.addDefault("removeMobLoot", true);
-		config.addDefault("debug", true);
+		config.addDefault("debug", false);
 		
 		config.options().copyDefaults(true);
 		saveConfig();
@@ -88,7 +89,7 @@ public class PhoenixSmithingManager extends JavaPlugin {
 			if (allSmithingTemplates.contains(templateMaterial.toUpperCase())) {
 				target.add(Material.getMaterial(templateMaterial));
 			} else {
-				getLogger().log(Level.WARNING, "Given MATERIAL name {0} is not a valid Smithing Template material name.", templateMaterial);
+				getLogger().log(Level.WARNING, "Given MATERIAL name {0} is not a valid Smithing Template material name. Check your config.yml", templateMaterial);
 			}
 		}
 	}
