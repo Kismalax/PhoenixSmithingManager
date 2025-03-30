@@ -1,13 +1,11 @@
 package com.github.kismalax.smithingmanager;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 
 import org.bukkit.Material;
-import org.bukkit.Tag;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,7 +15,7 @@ import com.github.kismalax.smithingmanager.listener.LootGenerateListener;
 import com.github.kismalax.smithingmanager.listener.MobLootListener;
 
 public class PhoenixSmithingManager extends JavaPlugin {
-	private static final ArrayList<String> allSmithingTemplates = new ArrayList<>();
+	private static final List<String> allSmithingTemplates;
 	private static PhoenixSmithingManager instance = null;
 	
 	private Set<Material> disableCrafting = new HashSet<>();
@@ -28,8 +26,27 @@ public class PhoenixSmithingManager extends JavaPlugin {
 	private boolean debug = true;
 	
 	static {
-		allSmithingTemplates.addAll(Tag.ITEMS_TRIM_TEMPLATES.getValues().stream().map(Enum::name).toList());
-		allSmithingTemplates.add(Material.NETHERITE_UPGRADE_SMITHING_TEMPLATE.name());
+		allSmithingTemplates = List.of(
+			Material.SENTRY_ARMOR_TRIM_SMITHING_TEMPLATE.name(),
+			Material.DUNE_ARMOR_TRIM_SMITHING_TEMPLATE.name(),
+			Material.COAST_ARMOR_TRIM_SMITHING_TEMPLATE.name(),
+			Material.WILD_ARMOR_TRIM_SMITHING_TEMPLATE.name(),
+			Material.WARD_ARMOR_TRIM_SMITHING_TEMPLATE.name(),
+			Material.EYE_ARMOR_TRIM_SMITHING_TEMPLATE.name(),
+			Material.VEX_ARMOR_TRIM_SMITHING_TEMPLATE.name(),
+			Material.TIDE_ARMOR_TRIM_SMITHING_TEMPLATE.name(),
+			Material.SNOUT_ARMOR_TRIM_SMITHING_TEMPLATE.name(),
+			Material.RIB_ARMOR_TRIM_SMITHING_TEMPLATE.name(),
+			Material.SPIRE_ARMOR_TRIM_SMITHING_TEMPLATE.name(),
+			Material.WAYFINDER_ARMOR_TRIM_SMITHING_TEMPLATE.name(),
+			Material.SHAPER_ARMOR_TRIM_SMITHING_TEMPLATE.name(),
+			Material.SILENCE_ARMOR_TRIM_SMITHING_TEMPLATE.name(),
+			Material.RAISER_ARMOR_TRIM_SMITHING_TEMPLATE.name(),
+			Material.HOST_ARMOR_TRIM_SMITHING_TEMPLATE.name(),
+			Material.FLOW_ARMOR_TRIM_SMITHING_TEMPLATE.name(),
+			Material.BOLT_ARMOR_TRIM_SMITHING_TEMPLATE.name(),
+			Material.NETHERITE_UPGRADE_SMITHING_TEMPLATE.name()
+		);
 	}
 	
 	@Override

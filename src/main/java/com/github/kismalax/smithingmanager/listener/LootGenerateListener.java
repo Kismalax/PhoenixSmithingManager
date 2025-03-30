@@ -5,9 +5,11 @@ import java.util.function.Predicate;
 import java.util.logging.Level;
 
 import org.bukkit.Location;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockDispenseLootEvent;
 import org.bukkit.event.world.LootGenerateEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -18,19 +20,27 @@ public class LootGenerateListener implements Listener {
 
 	@EventHandler
 	public void onLootGenerateEvent(LootGenerateEvent e) {
+		filterLoot(e.getLoot(), e.getEntity(), e.getLootContext().getLocation());
+	}
+	
+	@EventHandler
+	public void onBlockDispenseLoot(BlockDispenseLootEvent e) {
+		filterLoot(e.getDispensedLoot(), e.getPlayer(), e.getBlock().getLocation());
+	}
+	
+	private void filterLoot(List<ItemStack> loot, Entity entity, Location location) {
 		List<String> removables = null;
 		if (PhoenixSmithingManager.getInstance().isDebug()) {
-			removables = e.getLoot().stream().filter(removable).map(t -> t.getType().name()).toList();
+			removables = loot.stream().filter(removable).map(t -> t.getType().name()).toList();
 		}
 		
-		boolean removed = e.getLoot().removeIf(removable);
+		boolean removed = loot.removeIf(removable);
 		
 		if (removed && PhoenixSmithingManager.getInstance().isDebug()) {
-			Location loc = e.getLootContext().getLocation();
-			String player = e.getEntity() instanceof Player ? e.getEntity().getName() : "Unknown";
+			String player = entity instanceof Player ? entity.getName() : "Unknown";
 			for (String material : removables) {
-				PhoenixSmithingManager.getInstance().getLogger().log(Level.INFO, "Removed loot from generation at x:{0} y:{1} z:{2} @{3} for player: {4}: {5}",
-						new Object[] {loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(), loc.getWorld().getName(), player, material});
+				PhoenixSmithingManager.getInstance().getLogger().log(Level.INFO, "Removed loot from dispense at x:{0} y:{1} z:{2} @{3} for player: {4}: {5}",
+						new Object[] {location.getBlockX(), location.getBlockY(), location.getBlockZ(), location.getWorld().getName(), player, material});
 			}
 		}
 	}

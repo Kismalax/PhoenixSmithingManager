@@ -18,6 +18,8 @@ disableCrafting:
 - SENTRY_ARMOR_TRIM_SMITHING_TEMPLATE
 - HOST_ARMOR_TRIM_SMITHING_TEMPLATE
 - NETHERITE_UPGRADE_SMITHING_TEMPLATE
+- FLOW_ARMOR_TRIM_SMITHING_TEMPLATE
+- BOLT_ARMOR_TRIM_SMITHING_TEMPLATE
 
 # Remove these Smithing Templates from loot generation (for example: generated Loot Chests)
 # Only accepts Material format: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
@@ -39,6 +41,8 @@ removeGeneratedLoot:
 - SENTRY_ARMOR_TRIM_SMITHING_TEMPLATE
 - HOST_ARMOR_TRIM_SMITHING_TEMPLATE
 - NETHERITE_UPGRADE_SMITHING_TEMPLATE
+- FLOW_ARMOR_TRIM_SMITHING_TEMPLATE
+- BOLT_ARMOR_TRIM_SMITHING_TEMPLATE
 
 # Remove these Smithing Templates from brushing loot
 # Only accepts Material format: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
